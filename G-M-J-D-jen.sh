@@ -11,6 +11,9 @@ yum install -y maven
 echo "Install git"
 yum install -y git
 
+echo "install wget"
+yum install wget
+
 echo "Install Docker engine"
 yum update -y
 yum install docker -y
