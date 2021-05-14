@@ -1,0 +1,17 @@
+yum -y install httpd
+systemctl enable httpd
+systemctl start httpd
+yum -y install mysql-server mysql
+systemctl enable mysqld
+systemctl start mysqld
+mysql_secure_installation
+yum -y install php php-mysqlnd php-cli
+systemctl restart httpd
+
+
+vi /var/www/html/test.php
+
+<?php
+phpinfo90;
+?>
+www.0.0.0.0/test.php
