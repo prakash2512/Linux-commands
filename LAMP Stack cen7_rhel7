@@ -1,10 +1,10 @@
 yum -y install httpd
 systemctl enable httpd
 systemctl start httpd
-yum -y install mysql-server mysql
-systemctl enable mysqld
-systemctl start mysqld
+yum -y install mariadb-server mariadb
+systemctl start mariadb
 mysql_secure_installation
+systemctl enable mariadb
 yum -y install php php-mysqlnd php-cli
 systemctl restart httpd
 
