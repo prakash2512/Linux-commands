@@ -5,25 +5,18 @@ yum -y install mariadb-server mariadb
 systemctl start mariadb
 mysql_secure_installation
 systemctl enable mariadb
-yum -y install php php-mysql
-systemctl restart httpd
-yum install php-fpm
-
-
-vi /var/www/html/test.php
-
-<?php phpinfo(); ?>
-
-
-www.0.0.0.0/test.php
-
-# upgrade PHP 7.2 
-
 yum install epel-release yum-utils -y
 yum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm
 yum-config-manager --enable remi-php71
 yum install php php-common php-opcache php-mcrypt php-cli php-gd php-curl php-mysql -y
 systemctl restart httpd
+vi /var/www/html/info.php
+
+<?php phpinfo(); ?>
+
+
+www.0.0.0.0/info.php
+
 # installation of wordpress
 
 mysql -u root -p
@@ -40,7 +33,7 @@ wget http://wordpress.org/latest.tar.gz
 tar xzvf latest.tar.gz
 sudo rsync -avP ~/wordpress/ /var/www/html/
 mkdir /var/www/html/wp-content/uploads
-sudo chown -R apache:apache /var/www/html/*
+chown -R apache:apache /var/www/html/*
 cd /var/www/html
 cp wp-config-sample.php wp-config.php
 vi wp-config.php
