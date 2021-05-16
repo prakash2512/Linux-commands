@@ -1,3 +1,4 @@
+## Going to install Lamp,wordpress,phpmyadmin on centos 7 
 yum -y install httpd
 systemctl enable httpd
 systemctl start httpd
