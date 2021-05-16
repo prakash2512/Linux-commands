@@ -47,3 +47,33 @@ define('DB_USER', 'wordpressuser');
 define('DB_PASSWORD', 'password');
 
 http://server_domain_name_or_IP
+
+### phpmyadmin installation
+
+yum install phpmyadmin
+vi /etc/httpd/conf.d/phpMyAdmin.conf
+
+### add a line Require all granted
+
+1  # phpMyAdmin - Web based MySQL browser written in php
+     2  #
+     3  # Allows only localhost by default
+     4  #
+     5  # But allowing phpMyAdmin to anyone other than localhost should be considered
+     6  # dangerous unless properly secured by SSL
+     7
+     8  Alias /phpMyAdmin /usr/share/phpMyAdmin
+     9  Alias /phpmyadmin /usr/share/phpMyAdmin
+    10
+    11  <Directory /usr/share/phpMyAdmin/>
+    12     AddDefaultCharset UTF-8
+    13
+    14     <IfModule mod_authz_core.c>
+    15       # Apache 2.4
+    16       <RequireAny>
+    17         Require ip 209.11.159.76
+    18         Require ip ::1
+    19         Require all granted
+    20       </RequireAny>
+
+
