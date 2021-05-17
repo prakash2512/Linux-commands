@@ -77,4 +77,12 @@ vi /etc/httpd/conf.d/phpMyAdmin.conf
     19         Require all granted
     20       </RequireAny>
 
+### Configure domain name
+vi /etc/hosts
+
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+209.11.159.76  localost http://demo.digicrews.com/ 
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+
+
 
