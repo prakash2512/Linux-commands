@@ -1,0 +1,16 @@
+### Check domainname
+dnsdomainname
+hostname -f
+### Change to this format
+root@server12 # cat /etc/hosts
+10.10.2.32    server12.kerneltalks.com server12
+
+/etc/sysconfig/network
+
+DOMAINNAME=<domainname>
+Add below parameter in /etc/sysctl.conf
+
+kernel.domainname = <domainname>
+
+
+
