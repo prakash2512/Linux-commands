@@ -30,8 +30,8 @@ GRANT ALL PRIVILEGES ON wordpress.* TO wordpressuser@localhost IDENTIFIED BY 'pa
 FLUSH PRIVILEGES;
 exit
 
-wget http://wordpress.org/latest.tar.gz
-tar xzvf latest.tar.gz
+curl https://wordpress.org/latest.tar.gz --output wordpress.tar.gz
+tar xzvf wordpress.tar.gz
 sudo rsync -avP ~/wordpress/ /var/www/html/
 mkdir /var/www/html/wp-content/uploads
 chown -R apache:apache /var/www/html/*
@@ -81,7 +81,7 @@ vi /etc/httpd/conf.d/phpMyAdmin.conf
 vi /etc/hosts
 
 127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
-209.11.159.76  localost http://demo.digicrews.com/ 
+209.11.159.76  demo.digicrews.com demo 
 ::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
 
 
