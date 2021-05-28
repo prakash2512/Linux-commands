@@ -1,0 +1,22 @@
+### install oponssl on ubuntu 18.04
+
+sudo apt-get install openssl -y
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/private.key -out /etc/ssl/certs/certificate.crt
+sudo mkdir /var/www/newsite/
+sudo vi /var/www/newsite/index.html
+sudo chown -R www-data.www-data /var/www/newsite/
+sudo chmod -R 755 /var/www/newsite/
+sudo vi /etc/apache2/sites-available/newsite-ssl.conf
+
+<VirtualHost *:443>
+SSLEngine on
+SSLCertificateFile /etc/ssl/certs/certificate.crt
+SSLCertificateKeyFile /etc/ssl/private/private.key
+servername www.
+Documentroot /var/www/newsite
+</VirtualHost>
+
+sudo a2ensite newsite-ssl.conf
+sudo a2dissite default-ssl.conf
+sudo a2enmod ssl
+sudo systemctl restart apache2
