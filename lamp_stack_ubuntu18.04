@@ -1,0 +1,76 @@
+#!/bin/bash
+log=log_file.txt
+printf "Log File - " > $log
+date >> $log
+
+(
+if [[ $(lsb_release -rs) == "18.04" ]]; then 
+
+   
+	   echo " Current Instance is Ubuntu 18.04 " 
+       
+else
+	  echo " ubuntu version is not 18.04" 
+       exit
+fi
+
+var1="apache2"
+var2="mysql-client"
+var3="php7.2"
+var4="libapache2-mod-php7.2"
+var5="redis-server"
+var6="php7.2-redis"
+echo "system updating"
+#sudo wget http://repo.mysql.com/mysql-apt-config_0.8.10-1_all.deb
+#sudo dpkg -i mysql-apt-config_0.8.10-1_all.deb
+###php 7.3 repo
+#sudo add-apt-repository ppa:ondrej/php
+#deb http://ppa.launchpad.net/ondrej/php/ubuntu bionic m
+sudo apt-get update
+sudo apt install -y $var1
+sudo systemctl start $var1
+sudo systemctl enable $var1
+sudo apt install -y $var2
+sudo apt install -y $var3
+sudo apt install -y $var4
+sudo apt install -y $var5
+sudo apt install -y $var6
+echo " Installed Required software "
+echo "y" | sudo ufw enable
+sudo ufw allow 80/tcp
+sudo ufw allow 443/tcp
+#tar -xvf redis-4.0.0.tar.gz
+#cd redis-4.0.0
+#sudo make
+#sudo make install
+#cd utils
+#./install_server.sh
+sudo chmod  o+w /var/www/html
+#sudo chmod -R 775 /var/www/html
+sudo chown -R www-data:www-data /var/www/html
+
+sudo cat > /var/www/html/info.php <<- EOF
+<?php
+phpinfo ();
+phpinfo (INFO_MODULES);
+?>
+EOF
+sudo a2enmod rewrite
+sudo sed -i 's/Options Indexes FollowSymLinks/Options FollowSymLinks/g'  /etc/apache2/apache2.conf
+sudo sed -i '3 s/AllowOveride None/AllowOveride all/g' /etc/apache2/apache2.conf 
+
+configtestResult=$(sudo apachectl configtest 2>&1)
+
+if [ "$configtestResult" == "Syntax OK" ]; then
+
+    sudo systemctl restart $var1
+	echo " Apache Restarted "
+
+else
+
+    echo " Please Check config file"
+fi
+
+	 
+)2>&1 >> $log
+sudo cp log_file.txt /var/log/
