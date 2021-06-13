@@ -57,7 +57,7 @@ phpinfo (INFO_MODULES);
 EOF
 sudo a2enmod rewrite
 sudo sed -i 's/Options Indexes FollowSymLinks/Options FollowSymLinks/g'  /etc/apache2/apache2.conf
-sudo sed -i '3 s/AllowOveride None/AllowOveride all/g' /etc/apache2/apache2.conf 
+sudo sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf 
 
 configtestResult=$(sudo apachectl configtest 2>&1)
 
