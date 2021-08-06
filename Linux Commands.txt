@@ -1,0 +1,36 @@
+                   Linux commands
+
+##   List sudo user in ubuntu
+
+grep '^sudo:.*$' /etc/group | cut -d: -f4
+
+## add sudo user in ubuntu
+
+usermod -aG sudo username
+
+##need to edit the file to add sudo user with no password
+
+vi /etc/sudoers.d/90-cloud-init-users
+
+gitlab-runner ALL=(ALL) NOPASSWD:ALL
+
+## add sudo user in amazon linux
+
+sudo user -aG wheel username
+
+grep '^wheel:.*$' /etc/group | cut -d: -f4
+
+
+## to check that service is running or not
+
+ps cax | grep httpd
+
+
+gitlabrunner ALL = NOPASSWD: ALL
+gitlabrunner ALL=(ALL) NOPASSWD: ALL
+
+sudo useradd --comment 'GitLab Runner' --create-home gitlabrunner --shell /bin/bash
+
+
+
+gitlab-runner ALL = NOPASSWD: /home/gitlab-runner/builds/Ugx89GF3/0/prakash/project-of-shell-lamp/mkdir, /home/gitlab-runner/builds/Ugx89GF3/0/prakash/project-of-shell-lamp/chmod
