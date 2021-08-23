@@ -21,10 +21,30 @@ sudo user -aG wheel username
 grep '^wheel:.*$' /etc/group | cut -d: -f4
 
 
-## to check that service is running or not
+## To check that service is running or not
 
 ps cax | grep httpd
 
+## To copy or tranfer from  
+
+sudo rsync -avP ~/wordpress/ /var/www/html/
+
+##copy file one server to another server
+
+ssh-copy-id user@ip-address
+scp prakash@124.123.65.154:-p1047 /home/prakash/backupofunwind.zip in22labs@50.0.0.50:/home/in22labs
+
+
+###Mysql import
+
+mysql -u root -p < alldb.sql
+
+###Mysql export
+
+mysqldump -u root -p --all-databases > alldb.sql
+
+mysqldump -u root -p --opt --all-databases > alldb.sql
+mysqldump -u root -p --all-databases --skip-lock-tables > alldb.sql
 
 gitlabrunner ALL = NOPASSWD: ALL
 gitlabrunner ALL=(ALL) NOPASSWD: ALL
