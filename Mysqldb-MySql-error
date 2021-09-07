@@ -19,6 +19,23 @@ select * from user;
 ### To drop a user
 drop user 'username'@'localhost';
 
+###Mysql import
+
+mysql -u root -p < alldb.sql
+
+##MYsql Export
+
+mysqldump -u root -p --all-databases > alldb.sql
+
+mysqldump -u root -p --opt --all-databases > alldb.sql
+mysqldump -u root -p --all-databases --skip-lock-tables > alldb.sql
+
+
+###FROM AWS RDS
+
+mysqldump -h final-apsskill-instance.cqvikhaveaoj.us-west-2.rds.amazonaws.com -P 3306 -u root -p --all-databases > alldb.sql
+mysqldump -h apgroceryapp-instance.cqvikhaveaoj.us-west-2.rds.amazonaws.com -P 3306 -u apgrocery -p --all-databases > apgrocerydb.sql
+
 
 
 
