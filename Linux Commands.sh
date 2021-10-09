@@ -82,13 +82,13 @@ mysqldump -u root -p --all-databases --skip-lock-tables > alldb.sql
 
 ###FROM AWS RDS
 --------------------------------------------------------------------------------------------------------------------------------------
-mysqldump -h final-apsskill-instance.cqvikhaveaoj.us-west-2.rds.amazonaws.com -P 3306 -u root -p --all-databases > alldb.sql
-mysqldump -h apgroceryapp-instance.cqvikhaveaoj.us-west-2.rds.amazonaws.com -P 3306 -u apgrocery -p --all-databases > apgrocerydb.sql
+mysqldump -h aws-enpoint-url -P 3306 -u root -p --all-databases > alldb.sql
+mysqldump -h aws-enpoint-url  -P 3306 -u apgrocery -p --all-databases > apgrocerydb.sql
 ---------------------------------------------------------------------------------------------------------------------------------------
 
 ###Linux to S3 
 -----------------------------------------------------------------------------
-aws s3 cp apgrocerydb.sql s3://S3-bucketname/folder
+aws s3 cp filename.sql s3://S3-bucketname/folder
 aws s3 cp filename s3://S3-bucketname/folder
 -----------------------------------------------------------------------------
 
@@ -118,28 +118,11 @@ scp username@ip-address /path/ .
 nmap -p 22 www.cyberciti.biz
 -------------------------------
 
-ct-of-shell-lamp/mkdir, /home/gitlab-runner/builds/Ugx89GF3/0/prakash/project-of-shell-lamp/chmod
 
 
 
 gitlabrunner ALL = NOPASSWD: ALL
 gitlabrunner ALL=(ALL) NOPASSWD: ALL
 
-sudo useradd --comment 'GitLab Runner' --create-home gitlabrunner --shell /bin/bash
 
 
-
-gitlab-runner ALL = NOPASSWD: /home/gitlab-runner/builds/Ugx89GF3/0/prakash/proje
-
-
-ii5eKr7EeRTgavY
-
-
-phpmyadmin        
-servicefinder
-
-
-chmod scp ubuntu  
-final-apsskill-instance.cqvikhaveaoj.us-west-2.rds.amazonaws.com
-
-mysqldump -h final-apsskill-instance.cqvikhaveaoj.us-west-2.rds.amazonaws.com -P 3306 -u root -p --final-apsskilldb > alldb.sql
