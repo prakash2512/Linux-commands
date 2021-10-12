@@ -11,6 +11,7 @@ flush privileges;
 exit;
 
 ###if this is not works
+CREATE DATABASE databasename;
 CREATE USER 'new_user'@'localhost' IDENTIFIED BY 'new_password';
 GRANT ALL ON my_db.* TO 'new_user'@'localhost';
 FLUSH PRIVILEGES;
