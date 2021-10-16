@@ -39,8 +39,8 @@ mysqldump -u root -p --all-databases --skip-lock-tables > alldb.sql
 
 ###FROM AWS RDS
 
-mysqldump -h final-apsskill-instance.cqvikhaveaoj.us-west-2.rds.amazonaws.com -P 3306 -u root -p --all-databases > alldb.sql
-mysqldump -h apgroceryapp-instance.cqvikhaveaoj.us-west-2.rds.amazonaws.com -P 3306 -u apgrocery -p --all-databases > apgrocerydb.sql
+mysqldump -h aws-endpointaddress -P 3306 -u root -p --all-databases > alldb.sql
+mysqldump -h aws-endpointaddress -P 3306 -u user -p --all-databases > apgrocerydb.sql
 
 
 
