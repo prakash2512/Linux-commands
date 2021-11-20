@@ -1,0 +1,155 @@
+                   Linux commands
+
+##   List sudo user in ubuntu
+-------------------------------------------
+grep '^sudo:.*$' /etc/group | cut -d: -f4
+-------------------------------------------
+
+
+## add sudo user in ubuntu
+-----------------------------------------
+usermod -aG sudo username
+-------------------------------
+
+
+##need to edit the file to add sudo user with no password in aws instance
+--------------------------------------
+vi /etc/sudoers.d/90-cloud-init-users
+
+gitlab-runner ALL=(ALL) NOPASSWD:ALL
+-------------------------------------
+
+
+## add sudo user in amazon linux
+------------------------------------------
+sudo user -aG wheel username
+
+grep '^wheel:.*$' /etc/group | cut -d: -f4
+------------------------------------------
+
+
+
+## To check that service is running or not
+--------------------------
+ps cax | grep httpd
+--------------------------
+
+
+## To copy or tranfer from  
+--------------------------------------------
+sudo rsync -avP ~/wordpress/ /var/www/html/
+---------------------------------------------
+
+
+##copy file one server to another server
+---------------------------------------------------------------------------------------------------
+ssh-copy-id user@ip-address
+scp filename.zip username@ip-address:/home/user
+--------------------------------------------------------------------------------------------------
+
+
+###local to remote script execution
+-----------------------------------------------------------------------------------------------
+sshpass -p password ssh username@ip-address 'echo password | sudo -S bash script.sh'
+-----------------------------------------------------------------------------------------------
+
+
+###Run the script on particular user
+----------------------------------------
+sudo -u username bash /usr/bin/test.sh
+----------------------------------------
+
+
+### Check permission to tat user
+---------------------------------------------------------
+sudo find / -user username -group username -perm -u+rx
+---------------------------------------------------------
+
+
+###Mysql import
+-----------------------------
+mysql -u root -p < alldb.sql
+-----------------------------
+
+
+###Import to particular db
+---------------------------------------------------
+use db_name
+source /home/ubuntu/apemc_testing_12_oct_2021.sql
+----------------------------------------------------
+
+
+##MYsql Export
+---------------------------------------------------------------------
+mysqldump --no-tablespaces -u apemc_user -p apemc_db > apemc_db-a4n.sql
+mysqldump -u root -p --all-databases > alldb.sql
+mysqldump -u root -p --opt --all-databases > alldb.sql
+mysqldump -u root -p --all-databases --skip-lock-tables > alldb.sql
+------------------------------------------------------------------------
+
+
+###FROM AWS RDS
+--------------------------------------------------------------------------------------------------------------------------------------
+mysqldump -h aws-enpoint-url  -P 3306 -u root -p --all-databases > alldb.sql
+mysqldump -h aws-enpoint-url  -P 3306 -u apgrocery -p --all-databases > apgrocerydb.sql
+---------------------------------------------------------------------------------------------------------------------------------------
+
+
+###Linux to S3 
+-----------------------------------------------------------------------------
+aws s3 cp apgrocerydb.sql s3://S3-bucketname/folder
+aws s3 cp filename s3://S3-bucketname/folder
+-----------------------------------------------------------------------------
+
+
+###syboliclink
+-----------------------------------------------------------------------------------------
+sudo ln -s /etc/apache2/sites-available/tick.conf /etc/apache2/sites-enabled/tick.conf
+-----------------------------------------------------------------------------------------
+
+
+###zip command
+----------------------------------------------------
+zip -r filename.zip directory_name
+
+zip -r unwind-staging3.zip /var/www/html/sf_web
+----------------------------------------------------
+
+
+###SCP from other server to local 
+--------------------------------
+scp username@ip-address /path/ .
+--------------------------------
+
+
+### ping with port number
+------------------------------
+nmap -p 22 www.cyberciti.biz
+-------------------------------
+
+
+###time-change in server
+----------------------------------------
+dpkg-reconfigure tzdata
+timedatectl set-timezone Asia/Kolkata
+-----------------------------------------
+
+
+###mysql time change
+-----------------------------------------------------------------
+select @@global.time_zone;
+select @@session.time_zone;
+SET GLOBAL time_zone = "Asia/Calcutta";
+SET time_zone = "+05:30";
+nano /etc/mysql/mysql.conf.d/mysqld.cnf
+
+default-time-zone = "+05:30"
+------------------------------------------------------------------------
+
+
+gitlabrunner ALL = NOPASSWD: ALL
+gitlabrunner ALL=(ALL) NOPASSWD: ALL
+
+
+
+
