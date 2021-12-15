@@ -6,7 +6,7 @@ sudo rm -rf /etc/mysql /var/lib/mysql
 ###To create db, username and password
 
 create database databasename;
-grant all privileges on database.* to 'username'@'host' identified by 'password';
+grant all privileges on database.* to 'username'@'localhost' identified by 'password';
 flush privileges;
 exit;
 
