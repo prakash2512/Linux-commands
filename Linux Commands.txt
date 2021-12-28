@@ -95,6 +95,31 @@ mysqldump -h aws-enpoint-url  -P 3306 -u apgrocery -p --all-databases > apgrocer
 ---------------------------------------------------------------------------------------------------------------------------------------
 
 
+###Imp/exp into a table
+------------------------------------------------------------------------------------------------
+Import / Export for single table:
+
+Exporting table schema
+
+ -> mysqldump -u your_user_name -p your_database_name table_name > test.sql
+
+Importing data into table
+
+ -> mysql -u your_user_name -p database_name table_name < test.sql
+-------------------------------------------------------------------------------------------------
+
+
+###Import CSV into MySQL Table
+----------------------------------------------------------------
+LOAD DATA INFILE '/home/export_file.csv'
+INTO TABLE table_name
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '/n'
+IGNORE 1 ROWS;
+----------------------------------------------------------------
+
+
 ###Linux to S3 
 -----------------------------------------------------------------------------
 aws s3 cp apgrocerydb.sql s3://S3-bucketname/folder
@@ -147,6 +172,10 @@ default-time-zone = "+05:30"
 ------------------------------------------------------------------------
 
 
+##deleting older than 8 days file
+---------------------------------------------------------------
+find /home/ubuntu/s3backup/*.txt -mtime +8 -exec rm -rf {} \;
+-----------------------------------------------------------------
 gitlabrunner ALL = NOPASSWD: ALL
 gitlabrunner ALL=(ALL) NOPASSWD: ALL
 
