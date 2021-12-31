@@ -106,7 +106,10 @@ Exporting table schema
 Importing data into table
 
  -> mysql -u your_user_name -p database_name table_name < test.sql
--------------------------------------------------------------------------------------------------
+
+
+select * FROM (apemc_db.old_manifest_data) where (manifest_date) between 'Dec 13 2021 00:00' and 'Dec 13 2021 23:59'
+-----------------------------------------------------------------------------------------------------------------
 
 
 ###Import CSV into MySQL Table
