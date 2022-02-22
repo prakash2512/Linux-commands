@@ -1,0 +1,16 @@
+Check HTTP Response Headers Quickly
+
+Test your website HTTP response headers online. A quick way to find out what all headers are advertised by your web servers or network edge device
+
+Geekflare Tools
+https://gf.dev/http-headers-test
+06:17 PM
+Header add Content-Security-Policy "default-src 'self';"
+07:14 PM
+New messages
+      <Location />
+              <LimitExcept PUT GET POST>
+                      order deny,allow
+                      deny from all
+              </LimitExcept>
+      </Location>
