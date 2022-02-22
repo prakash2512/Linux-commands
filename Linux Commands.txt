@@ -41,6 +41,12 @@ sudo rsync -avP ~/wordpress/ /var/www/html/
 ---------------------------------------------
 
 
+## drop 3 level caches
+-------------------------------------------
+sync; echo 3 > /proc/sys/vm/drop_caches
+------------------------------------------
+
+
 ##copy file one server to another server
 ---------------------------------------------------------------------------------------------------
 ssh-copy-id user@ip-address
@@ -109,6 +115,8 @@ Importing data into table
 
 
 select * FROM (apemc_db.old_manifest_data) where (manifest_date) between 'Dec 13 2021 00:00' and 'Dec 13 2021 23:59'
+
+select * from old_manifest_data where manifest_no='56'\G;
 -----------------------------------------------------------------------------------------------------------------
 
 
@@ -179,9 +187,33 @@ default-time-zone = "+05:30"
 ---------------------------------------------------------------
 find /home/ubuntu/s3backup/*.txt -mtime +8 -exec rm -rf {} \;
 -----------------------------------------------------------------
+
+
+## To import csv to db
+mysqlimport --ignore-lines=1 --fields-terminated-by='|' --columns='column1,column2,.,.' --local -u root -p dbname  tablename.csv
+
+
+
+## PSQL 
+
+./pg_dump --host localhost --port 5432 --username postgres --format custom --verbose --file "/tmp/transaction_22082021.backup" --table public.transactiondetails "DISH_04May2017"
+
+./pg_dump --host localhost --port 5432 --username postgres --format custom --verbose --file "E/New folder/dish.sql" "00DISH_SEP12"
+
+./pg_dump --host localhost --port 5432 --username postgres --file "E:\New folder\dish_2022.sql" 00DISH_SEP12
+
+C:/Program Files/PostgreSQL/9.1/bin\pg_restore.exe --host localhost --port 5432 --username "postgres" --dbname "00DISH_SEP12" --no-password  --data-only --table transactiondetails --schema public --verbose "C:\Users\USER\Desktop\prakash\transaction_01022022.backup"
+
+
+psql -U username -d dbname < filename.sql
+
+-- For Postgres versions 9.0 or earlier
+psql -U username -d dbname -1 -f filename.sql
+
+or
+
+pg_restore -U username -d dbname -1 filename.dump
+
+
 gitlabrunner ALL = NOPASSWD: ALL
 gitlabrunner ALL=(ALL) NOPASSWD: ALL
-
-
-
-
