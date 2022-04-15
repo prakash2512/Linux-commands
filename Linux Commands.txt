@@ -12,6 +12,20 @@ usermod -aG sudo username
 -------------------------------
 
 
+###Command line transfer from server to AWS
+------------------------------------------------------------------------------------------------------------
+aws s3 cp filename s3://bucketname/
+
+aws s3 cp ../s3backup  s3://unwind-inhouse-backup/APEMC-INHOUSE/ --recursive --exclude "*" --include "*.zip"
+------------------------------------------------------------------------------------------------------------
+
+
+## AWS to local
+----------------------------------------------------------------------------------------
+aws s3 cp s3://csr-edu-prod ./ --recursive
+----------------------------------------------------------------------------
+
+
 ##need to edit the file to add sudo user with no password in aws instance
 --------------------------------------
 vi /etc/sudoers.d/90-cloud-init-users
@@ -196,9 +210,11 @@ mysqlimport --ignore-lines=1 --fields-terminated-by='|' --columns='column1,colum
 
 ## PSQL 
 
-./pg_dump --host localhost --port 5432 --username postgres --format custom --verbose --file "/tmp/transaction_22082021.backup" --table public.transactiondetails "DISH_04May2017"
+./pg_dump --host localhost --port 5432 --username postgres --format custom --verbose --file "/tmp/transaction_22082021.backup" --table public.transactiondetails "DISH_04May2017" --------------DISH 
 
 ./pg_dump --host localhost --port 5432 --username postgres --format custom --verbose --file "E/New folder/dish.sql" "00DISH_SEP12"
+
+./pg_dump --host localhost --port 5432 --username postgres 0DISHBOCW_SEP3 > "E:\New folder\dish_bocw_2022.sql" ------------------------------working 
 
 ./pg_dump --host localhost --port 5432 --username postgres --file "E:\New folder\dish_2022.sql" 00DISH_SEP12
 
@@ -212,7 +228,7 @@ psql -U username -d dbname -1 -f filename.sql
 
 or
 
-pg_restore -U username -d dbname -1 filename.dump
+pg_restore -U username -d dbname filename.dump
 
 
 gitlabrunner ALL = NOPASSWD: ALL
