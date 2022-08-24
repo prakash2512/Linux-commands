@@ -202,6 +202,10 @@ default-time-zone = "+05:30"
 find /home/ubuntu/s3backup/*.txt -mtime +8 -exec rm -rf {} \;
 -----------------------------------------------------------------
 
+## In centos
+--------------------------------------------------------------------------------
+find /mnt/HD/HD_a2/unwind/backup/apemcl/ -mtime +5 -type f -name "*zip" -delete
+-----------------------------------------------------------------------------------
 
 ## To import csv to db
 mysqlimport --ignore-lines=1 --fields-terminated-by='|' --columns='column1,column2,.,.' --local -u root -p dbname  tablename.csv
@@ -229,6 +233,11 @@ psql -U username -d dbname -1 -f filename.sql
 or
 
 pg_restore -U username -d dbname filename.dump
+
+
+\copy (select * from swpappliedservicedetails) to '/home/dish/swpapp.csv' With CSV header;
+
+
 
 
 gitlabrunner ALL = NOPASSWD: ALL
