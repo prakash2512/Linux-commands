@@ -52,6 +52,13 @@ ps cax | grep httpd
 ## To copy or tranfer from  
 --------------------------------------------
 sudo rsync -avP ~/wordpress/ /var/www/html/
+rsync -ivzhr dish@10.236.249.153:/opt/PostgreSQL
+
+## rsync background
+nohup rsync -avp root@61.0.172.109:/root/backup/uploads/ . &
+cat nohup.out
+jobs
+fg 1 or 2 ,job need to create
 ---------------------------------------------
 
 
@@ -84,6 +91,12 @@ sudo -u username bash /usr/bin/test.sh
 ---------------------------------------------------------
 sudo find / -user username -group username -perm -u+rx
 ---------------------------------------------------------
+
+
+### To find a words from directories
+----------------------------------------------------
+ grep -rnw '/var/log/secure' -e 'Accepted password'
+----------------------------------------------------
 
 
 ###Mysql import
@@ -202,40 +215,81 @@ default-time-zone = "+05:30"
 find /home/ubuntu/s3backup/*.txt -mtime +8 -exec rm -rf {} \;
 -----------------------------------------------------------------
 
+
 ## In centos
 --------------------------------------------------------------------------------
 find /mnt/HD/HD_a2/unwind/backup/apemcl/ -mtime +5 -type f -name "*zip" -delete
 -----------------------------------------------------------------------------------
 
-## To import csv to db
-mysqlimport --ignore-lines=1 --fields-terminated-by='|' --columns='column1,column2,.,.' --local -u root -p dbname  tablename.csv
 
+## copy from DB
+----------------------------------------------------------------------------------------
+\copy (select * from swpappliedservicedetails) to '/home/dish/swpapp.csv' With CSV header;
+-------------------------------------------------------------------------
+
+
+mysql -u Eskillindia -p -h eskillindia-cluster.cluster-ro-c8ncvnwfspp7.ap-south-1.rds.amazonaws.com -D eap_nsdc -e "select mobile, count(*) from user_profile_info where userid like '9%' group by mobile having count(*)>1" | sed "s/'/\'/;s/\t/\",\"/g;s/^/\"/;s/$/\"/;s/\n//g" > mobile_duplicate.csv
+
+mysql -u tnskill_user -p -D tnskill_db -e "select * from camera_detail" | sed "s/'/\'/;s/\t/\",\"/g;s/^/\"/;s/$/\"/;s/\n//g" > camera_details_27_01_2023.csv
+
+## To import csv to db
+----------------------------------------------------------------------
+mysqlimport --ignore-lines=1 --fields-terminated-by='|' --columns='column1,column2,.,.' --local -u root -p dbname  tablename.csv
+--------------------------------------------------------------------------
 
 
 ## PSQL 
+
+./pg_dump -U postgres tva_staging_2023 > tva_staging_2023.backup
+
+psql -U postgres -d tva_staging_2023 > tva_staging_2023.backup---------working
+
+pg_restore -U postgres -d tva_staging_2023 < tva_staging_2023.backup----working
 
 ./pg_dump --host localhost --port 5432 --username postgres --format custom --verbose --file "/tmp/transaction_22082021.backup" --table public.transactiondetails "DISH_04May2017" --------------DISH 
 
 ./pg_dump --host localhost --port 5432 --username postgres --format custom --verbose --file "E/New folder/dish.sql" "00DISH_SEP12"
 
-./pg_dump --host localhost --port 5432 --username postgres 0DISHBOCW_SEP3 > "E:\New folder\dish_bocw_2022.sql" ------------------------------working 
+./pg_dump --host localhost --port 5432 --username postgres 0DISHBOCW_SEP3 > "E:\New folder\dish_bocw_2022.sql" ------------------------------working
+
+./pg_dump "DISH_04May2017" --table=public.transactiondetails -W -U postgres > /tmp/transactiondetails.sql -----------working  
 
 ./pg_dump --host localhost --port 5432 --username postgres --file "E:\New folder\dish_2022.sql" 00DISH_SEP12
 
 C:/Program Files/PostgreSQL/9.1/bin\pg_restore.exe --host localhost --port 5432 --username "postgres" --dbname "00DISH_SEP12" --no-password  --data-only --table transactiondetails --schema public --verbose "C:\Users\USER\Desktop\prakash\transaction_01022022.backup"
 
+/opt/PostgreSQL/9.1/bin/./pg_dump --host localhost --port 5432 --username postgres --format custom --verbose --file "/tmp/transaction_12092023.sql" --table public.transactiondetails "DISH_04May2017"
 
 psql -U username -d dbname < filename.sql
 
 -- For Postgres versions 9.0 or earlier
-psql -U username -d dbname -1 -f filename.sql
+psql -U postgres -d tva_staging_2023 -1 -f tva_staging_2023.backup
 
 or
 
 pg_restore -U username -d dbname filename.dump
 
 
-\copy (select * from swpappliedservicedetails) to '/home/dish/swpapp.csv' With CSV header;
+
+
+
+WIFI password
+
+Unint A
+[6+|=*Lt{Vsz8+71
+
+
+Unit B
+;6hzLeWB]#h>=7n]
+
+Unwind Gateway 1
+</LPkXk6
+
+
+
+
+
+
 
 
 
