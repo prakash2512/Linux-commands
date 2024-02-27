@@ -1,0 +1,36 @@
+
+ 
+ /home/ubuntu/DISH_04May2017_04-Aug-2023.backup:109185: ERROR:  extra data after last expected column
+CONTEXT:  COPY boddetails, line 81173: "BO00034180      NFA0002454      2       VARUN MUTHUVEL                  \N      35      M       SHANMUGA SUNDARAVEL              \N      I                               5/455 A VASUNDARA MILL..."
+
+ERROR:  invalid hexadecimal data: odd number of digits
+CONTEXT:  COPY ownerdetails, line 47175, column userimage: "\xffd8ffe000104a46494600010101012c012c0000ffe161ea4578696600004d4d002a00000008000e010f00020000001200..."
+
+
+
+/opt/PostgreSQL/9.1/bin/./pg_dump --host localhost --port 5432 --username postgres --format custom --verbose --file "/tmp/transaction_12092023.sql" --table public.transactiondetails "DISH_04May2017"
+
+/opt/PostgreSQL/9.1/bin/.pg_dump -U postgres -d DISH_04May2017 -t public.transactiondetails > f:/tmp/transactiondetails.sql
+
+psql  -U postgres   database < path/to/store/name.sql
+
+./pg_dump "DISH_04May2017" --table=public.transactiondetails -W -U postgres > /tmp/transactiondetails.sql
+
+/opt/PostgreSQL/9.1/bin/./pg_dump --host localhost --port 5432 --username postgres --format custom --verbose --file "/tmp/transaction_12092023.sql" --exclude-table public.boddetails --exclude-table public.ownerdetails "DISH_04May2017"
+
+--exclude-table
+_0
+/opt/PostgreSQL/9.1/bin/pg_dump -U postgres "DISH_04May2017"  --exclude-table public.ownerdetails > DISH4May2017_$(date +"%d-%b-%Y").backup
+
+/opt/PostgreSQL/9.1/bin/pg_dump "DISH_04May2017" --table=public.ownerdetails -W -U postgres > /tmp/ownerdetails.sql
+/opt/PostgreSQL/9.1/bin/pg_dump "DISH_04May2017" --table=public.boddetails -W -U postgres > /tmp/boddetails.sql
+
+
+pg_restore -U postgres "DISH_old"  --exclude-table public.boddetails --exclude-table public.ownerdetails < DISH_04May2017_04-Aug-2023.backup
+
+
+/opt/PostgreSQL/9.1/bin/./pg_dump --host localhost --port 5432 --username postgres --format custom --verbose --file "/tmp/DISH4May2017_$(date +"%d-%b-%Y").backup" --exclude-table public.boddetails --exclude-table public.ownerdetails "DISH_04May2017"
+
+/opt/PostgreSQL/9.1/bin/./pg_dump --host localhost --port 5432 --username postgres --format custom --verbose --file "/tmp/DISH_ownerdetail$(date +"%d-%b-%Y").backup" --table public.ownerdetails  "DISH_04May2017"
+
+C:/Program Files/PostgreSQL/9.1/bin\pg_restore.exe --host localhost --port 5432 --username "postgres" --dbname "00DISH_SEP12" --no-password  --data-only --table transactiondetails --schema public --verbose "F:\Desktop-c\prakash\transaction_20092023.backup"

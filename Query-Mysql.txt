@@ -1,0 +1,55 @@
+
+select  yearnumber FROM contractorlicenserenewaldetails WHERE contractorregworkid = 'MOP0005607';
+
+update contractorlicenserenewaldetails set yearnumber='2021' where contractorregworkid = 'CW00001392' and yearnumber='2023';
+
+select * FROM contractorlicenserenewaldetails WHERE contractorregworkid = 'CW00001503';
+
+IMA/L/TVR01240/001
+anand_ais@hotmail.com
+IMA/L/TVR01240/002
+gksi2000@yahoo.co.in
+
+select * from contractorlicencerenewalpayment WHERE contractorregworkid = 'CW00006061';
+
+update contractorlicencedetails set nextrenewaldate='2021-12-31' where contractorregworkid = 'CW00001392';
+
+update contractorlicenserenewaldetails set noofworkersdirect='400' where contractorregworkid = 'CW00000400';
+
+insert into contractorlicenserenewaldetails (contractorregworkid, yearnumber, noofworkersdirect, dateofrenewal, licenceamount, licencepenaltyamount) values('CW00000400','2021','400','2021-09-06','15500.00','0');
+
+select * from transactiondetails where onlinepaymentrefrencenumber='CPABEHAQP5';
+
+select * from transactiondetails where factoryid='CW00001503';
+
+select factoryname from factorydetails where factoryid='NFA0003453';
+
+delete FROM contractorlicenserenewaldetails WHERE contractorregworkid = 'CW00001392' and yearnumber ='2020';
+
+.\pg_restore -U postgres --data-only -d "DISH_04May2017" -t "contractorlicenserenewaldetails" "contractorlicenserenewaldetails_31012022.backup"
+
+insert into contractorlicenserenewaldetails (contractorregworkid, yearnumber, noofworkersdirect, dateofrenewal, licenceamount, licencepenaltyamount) values('CW00001392','2020','60','2020-01-02','5000.00','0');
+
+select emailid from contractordetails  where contractorid in (select contractorid from contractorestablishmentdetails  where contractorregworkid in (select contractorregworkid from contractorregworkdetails  where contractorreferencenumber = 'CLA/KPM06046/115'));
+
+select emailid from ismwacontractordetails  where contractorid in (select contractorid from ismwacontractorestablishmentdetails  where contractorregworkid in (select contractorregworkid from ismwacontractorregworkdetails  where contractorreferencenumber = 'IMA/TVR01240/001'));
+
+insert into ismwacontractorlicenserenewaldetails (contractorregworkid, yearnumber, noofworkersdirect, dateofrenewal, licenceamount, licencepenaltyamount) values('CW00000400','2021','400','2021-09-06','15500.00','0');
+
+
+
+sodexo@sis
+Apollo.IN.APAC@sodexo.com
+
+
+
+
+
+
+
+
+
+
+
+
+
