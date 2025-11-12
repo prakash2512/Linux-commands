@@ -5,12 +5,10 @@
 grep '^sudo:.*$' /etc/group | cut -d: -f4
 -------------------------------------------
 
-
 ## add sudo user in ubuntu
 -----------------------------------------
 usermod -aG sudo username
 -------------------------------
-
 
 ###Command line transfer from server to AWS
 ------------------------------------------------------------------------------------------------------------
@@ -19,12 +17,10 @@ aws s3 cp filename s3://bucketname/
 aws s3 cp ../s3backup  s3://unwind-inhouse-backup/APEMC-INHOUSE/ --recursive --exclude "*" --include "*.zip"
 ------------------------------------------------------------------------------------------------------------
 
-
 ## AWS to local
 ----------------------------------------------------------------------------------------
 aws s3 cp s3://csr-edu-prod ./ --recursive
 ----------------------------------------------------------------------------
-
 
 ##need to edit the file to add sudo user with no password in aws instance
 --------------------------------------
@@ -33,7 +29,6 @@ vi /etc/sudoers.d/90-cloud-init-users
 gitlab-runner ALL=(ALL) NOPASSWD:ALL
 -------------------------------------
 
-
 ## add sudo user in amazon linux
 ------------------------------------------
 sudo user -aG wheel username
@@ -41,13 +36,10 @@ sudo user -aG wheel username
 grep '^wheel:.*$' /etc/group | cut -d: -f4
 ------------------------------------------
 
-
-
 ## To check that service is running or not
 --------------------------
 ps cax | grep httpd
 --------------------------
-
 
 ## To copy or tranfer from  
 --------------------------------------------
@@ -61,12 +53,10 @@ jobs
 fg 1 or 2 ,job need to create
 ---------------------------------------------
 
-
 ## drop 3 level caches
 -------------------------------------------
 sync; echo 3 > /proc/sys/vm/drop_caches
 ------------------------------------------
-
 
 ##copy file one server to another server
 ---------------------------------------------------------------------------------------------------
@@ -74,43 +64,36 @@ ssh-copy-id user@ip-address
 scp filename.zip username@ip-address:/home/user
 --------------------------------------------------------------------------------------------------
 
-
 ###local to remote script execution
 -----------------------------------------------------------------------------------------------
 sshpass -p password ssh username@ip-address 'echo password | sudo -S bash script.sh'
 -----------------------------------------------------------------------------------------------
-
 
 ###Run the script on particular user
 ----------------------------------------
 sudo -u username bash /usr/bin/test.sh
 ----------------------------------------
 
-
 ### Check permission to tat user
 ---------------------------------------------------------
 sudo find / -user username -group username -perm -u+rx
 ---------------------------------------------------------
-
 
 ### To find a words from directories
 ----------------------------------------------------
  grep -rnw '/var/log/secure' -e 'Accepted password'
 ----------------------------------------------------
 
-
 ###Mysql import
 -----------------------------
 mysql -u root -p < alldb.sql
 -----------------------------
-
 
 ###Import to particular db
 ---------------------------------------------------
 use db_name
 source /home/ubuntu/apemc_testing_12_oct_2021.sql
 ----------------------------------------------------
-
 
 ##MYsql Export
 ---------------------------------------------------------------------
@@ -120,13 +103,11 @@ mysqldump -u root -p --opt --all-databases > alldb.sql
 mysqldump -u root -p --all-databases --skip-lock-tables > alldb.sql
 ------------------------------------------------------------------------
 
-
 ###FROM AWS RDS
 --------------------------------------------------------------------------------------------------------------------------------------
 mysqldump -h aws-enpoint-url  -P 3306 -u root -p --all-databases > alldb.sql
 mysqldump -h aws-enpoint-url  -P 3306 -u apgrocery -p --all-databases > apgrocerydb.sql
 ---------------------------------------------------------------------------------------------------------------------------------------
-
 
 ###Imp/exp into a table
 ------------------------------------------------------------------------------------------------
@@ -146,7 +127,6 @@ select * FROM (apemc_db.old_manifest_data) where (manifest_date) between 'Dec 13
 select * from old_manifest_data where manifest_no='56'\G;
 -----------------------------------------------------------------------------------------------------------------
 
-
 ###Import CSV into MySQL Table
 ----------------------------------------------------------------
 LOAD DATA INFILE '/home/export_file.csv'
@@ -157,19 +137,16 @@ LINES TERMINATED BY '/n'
 IGNORE 1 ROWS;
 ----------------------------------------------------------------
 
-
 ###Linux to S3 
 -----------------------------------------------------------------------------
 aws s3 cp apgrocerydb.sql s3://S3-bucketname/folder
 aws s3 cp filename s3://S3-bucketname/folder
 -----------------------------------------------------------------------------
 
-
 ###syboliclink
 -----------------------------------------------------------------------------------------
 sudo ln -s /etc/apache2/sites-available/tick.conf /etc/apache2/sites-enabled/tick.conf
 -----------------------------------------------------------------------------------------
-
 
 ###zip command
 ----------------------------------------------------
@@ -178,25 +155,21 @@ zip -r filename.zip directory_name
 zip -r unwind-staging3.zip /var/www/html/sf_web
 ----------------------------------------------------
 
-
 ###SCP from other server to local 
 --------------------------------
 scp username@ip-address /path/ .
 --------------------------------
-
 
 ### ping with port number
 ------------------------------
 nmap -p 22 www.cyberciti.biz
 -------------------------------
 
-
 ###time-change in server
 ----------------------------------------
 dpkg-reconfigure tzdata
 timedatectl set-timezone Asia/Kolkata
 -----------------------------------------
-
 
 ###mysql time change
 -----------------------------------------------------------------
@@ -209,24 +182,20 @@ nano /etc/mysql/mysql.conf.d/mysqld.cnf
 default-time-zone = "+05:30"
 ------------------------------------------------------------------------
 
-
 ##deleting older than 8 days file
 ---------------------------------------------------------------
 find /home/ubuntu/s3backup/*.txt -mtime +8 -exec rm -rf {} \;
 -----------------------------------------------------------------
-
 
 ## In centos
 --------------------------------------------------------------------------------
 find /mnt/HD/HD_a2/unwind/backup/apemcl/ -mtime +5 -type f -name "*zip" -delete
 -----------------------------------------------------------------------------------
 
-
 ## copy from DB
 ----------------------------------------------------------------------------------------
 \copy (select * from swpappliedservicedetails) to '/home/dish/swpapp.csv' With CSV header;
 -------------------------------------------------------------------------
-
 
 mysql -u Eskillindia -p -h eskillindia-cluster.cluster-ro-c8ncvnwfspp7.ap-south-1.rds.amazonaws.com -D eap_nsdc -e "select mobile, count(*) from user_profile_info where userid like '9%' group by mobile having count(*)>1" | sed "s/'/\'/;s/\t/\",\"/g;s/^/\"/;s/$/\"/;s/\n//g" > mobile_duplicate.csv
 
@@ -236,7 +205,6 @@ mysql -u tnskill_user -p -D tnskill_db -e "select * from camera_detail" | sed "s
 ----------------------------------------------------------------------
 mysqlimport --ignore-lines=1 --fields-terminated-by='|' --columns='column1,column2,.,.' --local -u root -p dbname  tablename.csv
 --------------------------------------------------------------------------
-
 
 ## PSQL 
 
@@ -269,6 +237,21 @@ or
 
 pg_restore -U username -d dbname filename.dump
 
+###Docker
+
+docker logs containername
+docker logs -f containername
+docker system df
+##Remove untagged images
+docker system prune
+##Remove cache images
+docker builder prune
+docker ps -a
+docker stop containername
+docker rm containername
+docker run -d --name containername -p hostport:containerport imagename
+docker rmi imagename
+docker exec -it <container_name_or_id> bash
 
 
 
@@ -296,3 +279,4 @@ Unwind Gateway 1
 
 gitlabrunner ALL = NOPASSWD: ALL
 gitlabrunner ALL=(ALL) NOPASSWD: ALL
+
