@@ -252,6 +252,19 @@ docker rm containername
 docker run -d --name containername -p hostport:containerport imagename
 docker rmi imagename
 docker exec -it <container_name_or_id> bash
+## Auto start when instance is restarts
+docker update --restart unless-stopped backend(container-name)
+docker update --restart unless-stopped frontend(container-name)
+##network inspect network cmds
+docker network ls
+docker network inspect network name
+## Run on specific network
+docker run -d --name med-fnt --network internal_net -p 3000:3000 med-fnt:prod
+## Logs of docker path
+/var/lib/docker/container/containerid/containerid.log
+##Inspect
+docker inspect container
+
 
 
 
@@ -279,4 +292,5 @@ Unwind Gateway 1
 
 gitlabrunner ALL = NOPASSWD: ALL
 gitlabrunner ALL=(ALL) NOPASSWD: ALL
+
 
