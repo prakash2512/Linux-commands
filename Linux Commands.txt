@@ -263,7 +263,7 @@ docker run -d --name med-fnt --network internal_net -p 3000:3000 med-fnt:prod
 ## Logs of docker path
 /var/lib/docker/container/containerid/containerid.log
 ##Inspect
-docker inspect container
+docker inspect containername
 
 
 
@@ -292,5 +292,6 @@ Unwind Gateway 1
 
 gitlabrunner ALL = NOPASSWD: ALL
 gitlabrunner ALL=(ALL) NOPASSWD: ALL
+
 
 
